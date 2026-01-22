@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
@@ -10,6 +10,13 @@ const inter = Inter({
 });
 
 const COMPANY_NAME = process.env.NEXT_PUBLIC_COMPANY_NAME || "Courier Express";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
 
 export const metadata: Metadata = {
   title: `${COMPANY_NAME} - Global Shipping & Logistics Solutions`,
