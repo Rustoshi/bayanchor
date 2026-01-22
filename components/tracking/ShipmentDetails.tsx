@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, User, Package, Truck, Box } from "lucide-react";
+import { ChevronDown, User, Package, Truck, Box, ImageIcon, X } from "lucide-react";
+import Image from "next/image";
 import type { TrackingData } from "./types";
 
 const DEFAULT_CARRIER_REF = "BAY-19CD81";
@@ -13,6 +14,7 @@ interface ShipmentDetailsProps {
 
 export function ShipmentDetails({ data }: ShipmentDetailsProps) {
   const [isOpen, setIsOpen] = useState(true); // Open by default
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
     <motion.div
@@ -140,6 +142,35 @@ export function ShipmentDetails({ data }: ShipmentDetailsProps) {
                 </div>
               </div>
 
+              {/* Package Images */}
+              {data.packageImages && data.packageImages.length > 0 && (
+                <div className="p-4 bg-amber-50 rounded-xl mb-6">
+                  <div className="flex items-center gap-2 text-amber-700 text-sm mb-3">
+                    <ImageIcon className="h-4 w-4" />
+                    Package Images ({data.packageImages.length})
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
+                    {data.packageImages.map((image, index) => (
+                      <button
+                        key={image.publicId}
+                        onClick={() => setSelectedImage(image.url)}
+                        className="relative aspect-square rounded-lg overflow-hidden bg-white border border-amber-200 hover:border-amber-400 transition-colors group focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
+                      >
+                        <Image
+                          src={image.url}
+                          alt={`Package image ${index + 1}`}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                      </button>
+                    ))}
+                  </div>
+                  <p className="text-xs text-amber-600 mt-2">Tap an image to view full size</p>
+                </div>
+              )}
+
               {/* Carrier Info */}
               <div className="p-4 bg-purple-50 rounded-xl mb-6">
                 <div className="flex items-center gap-2 text-purple-700 text-sm mb-3">
@@ -192,6 +223,43 @@ export function ShipmentDetails({ data }: ShipmentDetailsProps) {
                 </div>
               </div>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Image Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 p-2 text-white/80 hover:text-white bg-black/50 rounded-full transition-colors z-10"
+              aria-label="Close image"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-4xl max-h-[90vh] aspect-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={selectedImage}
+                alt="Package image full view"
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                priority
+              />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

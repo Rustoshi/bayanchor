@@ -6,6 +6,12 @@ export interface TrackingEvent {
   timestamp: string;
 }
 
+export interface PackageImage {
+  url: string;
+  publicId: string;
+  uploadedAt?: string;
+}
+
 export interface LocationInfo {
   city: string;
   state: string;
@@ -67,6 +73,7 @@ export interface TrackingData {
       currency: string;
     };
   };
+  packageImages?: PackageImage[];
   // Classification
   consignmentType?: string;
   shipmentType?: string;

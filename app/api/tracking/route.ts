@@ -23,6 +23,12 @@ interface LocationInfo {
   };
 }
 
+interface PackageImage {
+  url: string;
+  publicId: string;
+  uploadedAt?: Date;
+}
+
 interface TrackingResponse {
   trackingCode: string;
   status: string;
@@ -57,6 +63,7 @@ interface TrackingResponse {
       currency: string;
     };
   };
+  packageImages?: PackageImage[];
   serviceType: string;
   consignmentType?: string;
   shipmentType?: string;
@@ -210,6 +217,11 @@ async function handleGet(request: NextRequest): Promise<NextResponse> {
       })),
       createdAt: shipment.createdAt,
       updatedAt: shipment.updatedAt,
+      packageImages: shipment.packageImages?.map((img) => ({
+        url: img.url,
+        publicId: img.publicId,
+        uploadedAt: img.uploadedAt,
+      })),
     };
 
     const response: ApiResponse<TrackingResponse> = {
