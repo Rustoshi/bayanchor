@@ -18,17 +18,17 @@ export function StatCard({ value, suffix = "", prefix = "", label, icon: Icon, d
     <motion.div
       variants={fadeInUp}
       custom={delay}
-      className="relative text-center p-6 lg:p-8"
+      className="relative text-center p-3 sm:p-4 lg:p-6"
     >
       {Icon && (
-        <div className="inline-flex items-center justify-center w-14 h-14 mb-4 rounded-xl bg-orange-500/10">
-          <Icon className="h-7 w-7 text-orange-500" />
+        <div className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 mb-2 sm:mb-3 rounded-lg bg-orange-500/10">
+          <Icon className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-orange-500" />
         </div>
       )}
-      <div className="text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 mb-2">
+      <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 mb-1">
         <AnimatedCounter value={value} suffix={suffix} prefix={prefix} />
       </div>
-      <p className="text-gray-600 text-sm lg:text-base font-medium uppercase tracking-wide">
+      <p className="text-gray-600 text-[10px] sm:text-xs lg:text-sm font-medium uppercase tracking-wide">
         {label}
       </p>
     </motion.div>

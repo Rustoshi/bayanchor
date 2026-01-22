@@ -14,12 +14,12 @@ const stats = [
 
 export function StatsSection() {
   return (
-    <section className="relative py-20 bg-white">
+    <section className="relative py-8 sm:py-12 lg:py-16 bg-white">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-50" />
       
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <StaggerWrapper className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+      <div className="relative max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+        <StaggerWrapper className="grid grid-cols-4 gap-1 sm:gap-4 lg:gap-6">
           {stats.map((stat, index) => (
             <motion.div key={stat.label} variants={fadeInUp}>
               <StatCard
