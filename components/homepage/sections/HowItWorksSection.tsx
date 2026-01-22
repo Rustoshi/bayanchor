@@ -40,7 +40,7 @@ export function HowItWorksSection() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-sm font-medium mb-6">
             Simple Process
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 sm:mb-6">
             How It Works
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">

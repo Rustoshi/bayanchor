@@ -51,7 +51,7 @@ export function TestimonialsSection() {
             <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
             Client Testimonials
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 sm:mb-6">
             What Our Clients Say
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">

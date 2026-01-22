@@ -90,7 +90,7 @@ export function WhyChooseUsSection() {
                 Why {process.env.NEXT_PUBLIC_COMPANY_NAME || "Us"}
               </div>
               
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-4 sm:mb-6">
                 Trusted by Businesses of All Sizes
               </h2>
               

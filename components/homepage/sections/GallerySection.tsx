@@ -57,7 +57,7 @@ export function GallerySection() {
             <Camera className="h-4 w-4" />
             Gallery
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 sm:mb-6">
             Our Operations in Action
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
