@@ -55,7 +55,7 @@ export function WhyChooseUsSection() {
             <motion.div variants={slideInLeft} className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/brand2.jpeg"
+                  src="/brand2.png"
                   alt="Professional logistics team"
                   className="w-full h-[500px] object-cover"
                 />

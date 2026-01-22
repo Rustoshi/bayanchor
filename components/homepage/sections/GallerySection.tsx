@@ -8,17 +8,17 @@ import NextImage from "next/image";
 
 const galleryImages = [
   {
-    src: "/brand1.jpeg",
+    src: "/brand1.png",
     alt: "Logistics Operations",
     title: "Global Logistics Network",
   },
   {
-    src: "/brand2.jpeg",
+    src: "/brand2.png",
     alt: "Warehouse Operations",
     title: "Modern Warehousing",
   },
   {
-    src: "/brand3.jpeg",
+    src: "/brand3.png",
     alt: "Delivery Fleet",
     title: "Reliable Delivery",
   },

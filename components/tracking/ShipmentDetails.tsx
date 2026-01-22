@@ -248,7 +248,7 @@ export function ShipmentDetails({ data }: ShipmentDetailsProps) {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-4xl max-h-[90vh] aspect-auto"
+              className="relative w-full h-full max-w-5xl max-h-[90vh]"
               onClick={(e) => e.stopPropagation()}
             >
               <Image
@@ -258,6 +258,7 @@ export function ShipmentDetails({ data }: ShipmentDetailsProps) {
                 className="object-contain"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                 priority
+                unoptimized={false}
               />
             </motion.div>
           </motion.div>
