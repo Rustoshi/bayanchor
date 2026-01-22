@@ -93,7 +93,7 @@ export function HeroSection() {
           <TrackingInput className="max-w-2xl mb-8" />
 
           {/* Secondary CTA */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -110,7 +110,7 @@ export function HeroSection() {
                 <ArrowRight className="h-4 w-4" />
               </motion.button>
             </Link>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
 
