@@ -130,8 +130,8 @@ export default function RootLayout({
             /* Position GTranslate widget */
             .gtranslate_wrapper {
               position: fixed;
-              bottom: 20px;
-              left: 20px;
+              bottom: 0;
+              left: 0;
               right: auto;
               z-index: 9999;
             }
@@ -140,18 +140,18 @@ export default function RootLayout({
             @media (min-width: 768px) {
               .gtranslate_wrapper {
                 left: auto;
-                right: 20px;
+                right: 0;
               }
             }
             
             /* Style the floating widget */
             #gt-float-switcher {
-              background: white !important;
+              background: #000000 !important;
               border-radius: 8px !important;
-              box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06) !important;
-              border: 1px solid #e5e7eb !important;
-              padding: 4px !important;
-              transform: scale(0.85) !important;
+              box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3) !important;
+              border: 1px solid #333333 !important;
+              padding: 3px !important;
+              transform: scale(0.75) !important;
               transform-origin: bottom left !important;
             }
             
@@ -163,12 +163,19 @@ export default function RootLayout({
             
             /* Style the dropdown */
             #gt-float-switcher .gt-selected {
-              background: white !important;
-              border: 1px solid #d1d5db !important;
+              background: #000000 !important;
+              border: 1px solid #444444 !important;
               border-radius: 6px !important;
-              padding: 4px 8px !important;
+              padding: 3px 6px !important;
               transition: all 0.2s ease !important;
-              font-size: 13px !important;
+              font-size: 11px !important;
+              color: #ffffff !important;
+            }
+            
+            /* Flag size */
+            #gt-float-switcher img {
+              width: 16px !important;
+              height: 12px !important;
             }
             
             #gt-float-switcher .gt-selected:hover {
