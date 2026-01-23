@@ -62,6 +62,7 @@ export enum ShipmentStatus {
   RETURNED_TO_SENDER = "RETURNED_TO_SENDER",
   CANCELLED = "CANCELLED",
   DAMAGED = "DAMAGED",
+  SEIZED = "SEIZED",
 }
 
 export enum QuoteStatus {

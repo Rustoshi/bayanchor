@@ -184,6 +184,7 @@ export async function sendStatusUpdateEmail(
     OUT_FOR_DELIVERY: "#8b5cf6",
     DELIVERED: "#10b981",
     ON_HOLD: "#ef4444",
+    SEIZED: "#be123c",
   };
 
   const statusEmojis: Record<string, string> = {
@@ -193,6 +194,7 @@ export async function sendStatusUpdateEmail(
     OUT_FOR_DELIVERY: "🚛",
     DELIVERED: "✅",
     ON_HOLD: "⏸️",
+    SEIZED: "🚫",
   };
 
   const statusColor = statusColors[status] || "#6b7280";

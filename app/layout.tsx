@@ -131,26 +131,44 @@ export default function RootLayout({
             .gtranslate_wrapper {
               position: fixed;
               bottom: 20px;
-              right: 20px;
+              left: 20px;
+              right: auto;
               z-index: 9999;
+            }
+            
+            /* On larger screens, move to right */
+            @media (min-width: 768px) {
+              .gtranslate_wrapper {
+                left: auto;
+                right: 20px;
+              }
             }
             
             /* Style the floating widget */
             #gt-float-switcher {
               background: white !important;
-              border-radius: 12px !important;
-              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+              border-radius: 8px !important;
+              box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06) !important;
               border: 1px solid #e5e7eb !important;
-              padding: 8px !important;
+              padding: 4px !important;
+              transform: scale(0.85) !important;
+              transform-origin: bottom left !important;
+            }
+            
+            @media (min-width: 768px) {
+              #gt-float-switcher {
+                transform-origin: bottom right !important;
+              }
             }
             
             /* Style the dropdown */
             #gt-float-switcher .gt-selected {
               background: white !important;
               border: 1px solid #d1d5db !important;
-              border-radius: 8px !important;
-              padding: 6px 10px !important;
+              border-radius: 6px !important;
+              padding: 4px 8px !important;
               transition: all 0.2s ease !important;
+              font-size: 13px !important;
             }
             
             #gt-float-switcher .gt-selected:hover {

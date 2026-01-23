@@ -34,6 +34,7 @@ export const STATUS_LABELS: Record<ShipmentStatus, string> = {
   [ShipmentStatus.RETURNED_TO_SENDER]: "Returned to Sender",
   [ShipmentStatus.CANCELLED]: "Cancelled",
   [ShipmentStatus.DAMAGED]: "Damaged",
+  [ShipmentStatus.SEIZED]: "Seized",
 };
 
 export const STATUS_DESCRIPTIONS: Record<ShipmentStatus, string> = {
@@ -52,6 +53,7 @@ export const STATUS_DESCRIPTIONS: Record<ShipmentStatus, string> = {
   [ShipmentStatus.RETURNED_TO_SENDER]: "Package is being returned to sender",
   [ShipmentStatus.CANCELLED]: "Shipment has been cancelled",
   [ShipmentStatus.DAMAGED]: "Package was damaged during transit",
+  [ShipmentStatus.SEIZED]: "Package has been seized by customs or authorities",
 };
 
 // ============================================================================
@@ -200,6 +202,7 @@ export function getStatusColorClass(status: ShipmentStatus): string {
     [ShipmentStatus.RETURNED_TO_SENDER]: "bg-pink-100 text-pink-800",
     [ShipmentStatus.CANCELLED]: "bg-gray-100 text-gray-800",
     [ShipmentStatus.DAMAGED]: "bg-red-100 text-red-800",
+    [ShipmentStatus.SEIZED]: "bg-rose-100 text-rose-800",
   };
   return colorMap[status] || "bg-gray-100 text-gray-800";
 }

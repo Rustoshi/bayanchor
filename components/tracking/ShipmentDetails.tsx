@@ -65,11 +65,14 @@ export function ShipmentDetails({ data }: ShipmentDetailsProps) {
                   <p className="font-semibold text-gray-900 mb-1">
                     {data.sender.name}
                   </p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-600 mb-1">
                     {data.sender.address}
                   </p>
                   {data.sender.phone && (
-                    <p className="text-sm text-gray-500 mt-1">{data.sender.phone}</p>
+                    <p className="text-sm text-gray-500">{data.sender.phone}</p>
+                  )}
+                  {data.sender.email && (
+                    <p className="text-sm text-gray-500">{data.sender.email}</p>
                   )}
                 </div>
 
@@ -82,11 +85,14 @@ export function ShipmentDetails({ data }: ShipmentDetailsProps) {
                   <p className="font-semibold text-gray-900 mb-1">
                     {data.receiver.name}
                   </p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-600 mb-1">
                     {data.receiver.address}
                   </p>
                   {data.receiver.phone && (
-                    <p className="text-sm text-gray-500 mt-1">{data.receiver.phone}</p>
+                    <p className="text-sm text-gray-500">{data.receiver.phone}</p>
+                  )}
+                  {data.receiver.email && (
+                    <p className="text-sm text-gray-500">{data.receiver.email}</p>
                   )}
                 </div>
               </div>
