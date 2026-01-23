@@ -95,67 +95,15 @@ export default function RootLayout({
                 "detect_browser_language": true,
                 "languages": ["en","es","fr","de","it","pt","zh-CN","zh-TW","ja","ko","ar","ru","hi","bn","pa","te","mr","ta","ur","tr","pl","nl","sv","no","da","fi","cs","el","he","id","ms","th","vi","ro","hu","uk","bg","hr","sk","sl","lt","lv","et"],
                 "wrapper_selector": ".gtranslate_wrapper",
-                "float_switcher_open_direction": "top",
-                "alt_flags": {"en":"usa","pt":"brazil"},
-                "flag_style": "3d",
-                "flag_size": 16,
-                "switcher_horizontal_position": "left",
-                "switcher_vertical_position": "bottom"
+                "alt_flags": {"en":"usa","pt":"brazil"}
               };
             `,
           }}
         />
         <Script
-          src="https://cdn.gtranslate.net/widgets/latest/float.js"
+          src="https://cdn.gtranslate.net/widgets/latest/dropdown.js"
           strategy="afterInteractive"
           defer
-        />
-        <Script
-          id="gtranslate-style-fix"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              function fixGTranslateStyles() {
-                var widget = document.getElementById('gt-float-switcher');
-                if (widget) {
-                  widget.style.cssText = 'position: fixed !important; bottom: 0 !important; left: 0 !important; right: auto !important; top: auto !important; margin: 0 !important; background: #000 !important; border-radius: 0 8px 0 0 !important; box-shadow: none !important; border: none !important; padding: 4px 8px !important; z-index: 9999 !important;';
-                  
-                  var selected = widget.querySelector('.gt-selected');
-                  if (selected) {
-                    selected.style.cssText = 'background: #000 !important; border: none !important; padding: 4px 6px !important; font-size: 10px !important; color: #fff !important;';
-                  }
-                  
-                  var imgs = widget.querySelectorAll('img');
-                  imgs.forEach(function(img) {
-                    img.style.cssText = 'width: 14px !important; height: 10px !important; max-width: 14px !important; max-height: 10px !important;';
-                  });
-                  
-                  var spans = widget.querySelectorAll('.gt-selected span, .gt-current-lang');
-                  spans.forEach(function(span) {
-                    span.style.cssText = 'color: #fff !important; font-size: 10px !important;';
-                  });
-                }
-              }
-              
-              // Run multiple times to catch widget after it loads
-              setTimeout(fixGTranslateStyles, 500);
-              setTimeout(fixGTranslateStyles, 1000);
-              setTimeout(fixGTranslateStyles, 2000);
-              setTimeout(fixGTranslateStyles, 3000);
-              
-              // Also observe for changes
-              var observer = new MutationObserver(function(mutations) {
-                fixGTranslateStyles();
-              });
-              
-              setTimeout(function() {
-                var widget = document.getElementById('gt-float-switcher');
-                if (widget) {
-                  observer.observe(widget, { attributes: true, childList: true, subtree: true });
-                }
-              }, 2000);
-            `,
-          }}
         />
       </head>
       <body className={`${inter.variable} font-sans antialiased overflow-x-hidden`}>
@@ -171,135 +119,58 @@ export default function RootLayout({
         {/* GTranslate Widget Container */}
         <div className="gtranslate_wrapper" />
         
-        {/* Custom styles for GTranslate widget */}
+        {/* Custom styles for GTranslate dropdown widget */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            /* Force position - override all widget defaults */
-            .gtranslate_wrapper,
-            body .gtranslate_wrapper,
-            html body .gtranslate_wrapper {
+            /* Position wrapper at bottom left */
+            .gtranslate_wrapper {
               position: fixed !important;
               bottom: 0 !important;
               left: 0 !important;
-              right: auto !important;
-              top: auto !important;
               z-index: 9999 !important;
               margin: 0 !important;
               padding: 0 !important;
             }
             
-            /* Force widget container position */
-            #gt-float-switcher,
-            body #gt-float-switcher,
-            .gtranslate_wrapper #gt-float-switcher {
-              position: fixed !important;
-              bottom: 0 !important;
-              left: 0 !important;
-              right: auto !important;
-              top: auto !important;
-              margin: 0 !important;
+            /* Style the select dropdown */
+            .gtranslate_wrapper select,
+            .gt_selector {
               background: #000000 !important;
+              color: #ffffff !important;
+              border: none !important;
               border-radius: 0 8px 0 0 !important;
-              box-shadow: none !important;
-              border: none !important;
-              padding: 4px 8px !important;
-            }
-            
-            /* Style the dropdown button */
-            #gt-float-switcher .gt-selected,
-            body #gt-float-switcher .gt-selected {
-              background: #000000 !important;
-              border: none !important;
-              border-radius: 4px !important;
-              padding: 4px 6px !important;
-              font-size: 10px !important;
-              color: #ffffff !important;
-              line-height: 1 !important;
-            }
-            
-            /* Force smaller flag size */
-            #gt-float-switcher img,
-            body #gt-float-switcher img,
-            #gt-float-switcher .gt-selected img {
-              width: 14px !important;
-              height: 10px !important;
-              max-width: 14px !important;
-              max-height: 10px !important;
-              border-radius: 2px !important;
-            }
-            
-            /* Text styling */
-            #gt-float-switcher .gt-selected span,
-            #gt-float-switcher .gt-current-lang {
-              color: #ffffff !important;
-              font-size: 10px !important;
-            }
-            
-            #gt-float-switcher .gt-selected:hover {
-              background: #222222 !important;
-            }
-            
-            /* Style the language list dropdown */
-            #gt-float-switcher .gt-lang-list,
-            body #gt-float-switcher .gt-lang-list {
-              background: #000000 !important;
-              border: 1px solid #333333 !important;
-              border-radius: 8px !important;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-              max-height: 300px !important;
-              overflow-y: auto !important;
-              bottom: 100% !important;
-              left: 0 !important;
-            }
-            
-            #gt-float-switcher .gt-lang-list a {
               padding: 6px 10px !important;
-              color: #ffffff !important;
               font-size: 11px !important;
+              cursor: pointer !important;
+              outline: none !important;
+              -webkit-appearance: none !important;
+              -moz-appearance: none !important;
+              appearance: none !important;
+              padding-right: 24px !important;
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+              background-repeat: no-repeat !important;
+              background-position: right 6px center !important;
             }
             
-            #gt-float-switcher .gt-lang-list a:hover {
-              background-color: #333333 !important;
+            .gtranslate_wrapper select:hover,
+            .gt_selector:hover {
+              background-color: #222222 !important;
             }
             
-            /* Mobile - even smaller */
+            .gtranslate_wrapper select option {
+              background: #000000 !important;
+              color: #ffffff !important;
+              padding: 8px !important;
+            }
+            
+            /* Mobile - smaller */
             @media (max-width: 640px) {
-              #gt-float-switcher .gt-selected,
-              body #gt-float-switcher .gt-selected {
-                font-size: 9px !important;
-                padding: 3px 5px !important;
+              .gtranslate_wrapper select,
+              .gt_selector {
+                font-size: 10px !important;
+                padding: 5px 8px !important;
+                padding-right: 20px !important;
               }
-              
-              #gt-float-switcher img,
-              body #gt-float-switcher img {
-                width: 12px !important;
-                height: 9px !important;
-                max-width: 12px !important;
-                max-height: 9px !important;
-              }
-              
-              #gt-float-switcher .gt-lang-list {
-                max-height: 300px !important;
-              }
-            }
-            
-            /* Scrollbar styling for language list */
-            #gt-float-switcher .gt-lang-list::-webkit-scrollbar {
-              width: 4px;
-            }
-            
-            #gt-float-switcher .gt-lang-list::-webkit-scrollbar-track {
-              background: #111111;
-              border-radius: 10px;
-            }
-            
-            #gt-float-switcher .gt-lang-list::-webkit-scrollbar-thumb {
-              background: #444444;
-              border-radius: 10px;
-            }
-            
-            #gt-float-switcher .gt-lang-list::-webkit-scrollbar-thumb:hover {
-              background: #666666;
             }
           `
         }} />
