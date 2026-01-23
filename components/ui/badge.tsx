@@ -66,6 +66,7 @@ const statusConfig: Record<
   RETURNED_TO_SENDER: { label: "Returned to Sender", variant: "danger" },
   CANCELLED: { label: "Cancelled", variant: "danger" },
   DAMAGED: { label: "Damaged", variant: "danger" },
+  SEIZED: { label: "Seized", variant: "danger" },
 };
 
 function StatusBadge({ status }: StatusBadgeProps) {

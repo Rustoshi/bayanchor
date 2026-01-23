@@ -61,6 +61,7 @@ TrackingEventSchema.pre("save", function () {
       [ShipmentStatus.RETURNED_TO_SENDER]: "Package has been returned to sender",
       [ShipmentStatus.CANCELLED]: "Shipment has been cancelled",
       [ShipmentStatus.DAMAGED]: "Package has been reported as damaged",
+      [ShipmentStatus.SEIZED]: "Package has been seized by customs or authorities",
     };
     this.description = statusDescriptions[this.status as ShipmentStatus] || "";
   }
