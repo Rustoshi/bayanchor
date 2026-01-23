@@ -64,6 +64,9 @@ export function HeroSection() {
             </span>
           </motion.div>
 
+
+
+
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -77,6 +80,8 @@ export function HeroSection() {
             </span>{" "}
             with Precision
           </motion.h1>
+
+          
 
           {/* Subheadline */}
           <motion.p
