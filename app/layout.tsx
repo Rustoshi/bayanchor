@@ -127,100 +127,108 @@ export default function RootLayout({
         {/* Custom styles for GTranslate widget */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            /* Position GTranslate widget */
-            .gtranslate_wrapper {
-              position: fixed;
-              bottom: 0;
-              left: 0;
-              right: auto;
-              z-index: 9999;
+            /* Force position - override all widget defaults */
+            .gtranslate_wrapper,
+            body .gtranslate_wrapper,
+            html body .gtranslate_wrapper {
+              position: fixed !important;
+              bottom: 0 !important;
+              left: 0 !important;
+              right: auto !important;
+              top: auto !important;
+              z-index: 9999 !important;
+              margin: 0 !important;
+              padding: 0 !important;
             }
             
-            /* On larger screens, move to right */
-            @media (min-width: 768px) {
-              .gtranslate_wrapper {
-                left: auto;
-                right: 0;
-              }
-            }
-            
-            /* Style the floating widget */
-            #gt-float-switcher {
+            /* Force widget container position */
+            #gt-float-switcher,
+            body #gt-float-switcher,
+            .gtranslate_wrapper #gt-float-switcher {
+              position: fixed !important;
+              bottom: 0 !important;
+              left: 0 !important;
+              right: auto !important;
+              top: auto !important;
+              margin: 0 !important;
               background: #000000 !important;
-              border-radius: 8px !important;
-              box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3) !important;
-              border: 1px solid #333333 !important;
-              padding: 3px !important;
-              transform: scale(0.75) !important;
-              transform-origin: bottom left !important;
+              border-radius: 0 8px 0 0 !important;
+              box-shadow: none !important;
+              border: none !important;
+              padding: 4px 8px !important;
             }
             
-            @media (min-width: 768px) {
-              #gt-float-switcher {
-                transform-origin: bottom right !important;
-              }
-            }
-            
-            /* Style the dropdown */
-            #gt-float-switcher .gt-selected {
+            /* Style the dropdown button */
+            #gt-float-switcher .gt-selected,
+            body #gt-float-switcher .gt-selected {
               background: #000000 !important;
-              border: 1px solid #444444 !important;
-              border-radius: 6px !important;
-              padding: 3px 6px !important;
-              transition: all 0.2s ease !important;
-              font-size: 11px !important;
+              border: none !important;
+              border-radius: 4px !important;
+              padding: 4px 6px !important;
+              font-size: 10px !important;
               color: #ffffff !important;
+              line-height: 1 !important;
             }
             
-            /* Flag size */
-            #gt-float-switcher img {
-              width: 16px !important;
-              height: 12px !important;
+            /* Force smaller flag size */
+            #gt-float-switcher img,
+            body #gt-float-switcher img,
+            #gt-float-switcher .gt-selected img {
+              width: 14px !important;
+              height: 10px !important;
+              max-width: 14px !important;
+              max-height: 10px !important;
+              border-radius: 2px !important;
+            }
+            
+            /* Text styling */
+            #gt-float-switcher .gt-selected span,
+            #gt-float-switcher .gt-current-lang {
+              color: #ffffff !important;
+              font-size: 10px !important;
             }
             
             #gt-float-switcher .gt-selected:hover {
-              border-color: #f97316 !important;
-              box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1) !important;
+              background: #222222 !important;
             }
             
-            /* Style the language list */
-            #gt-float-switcher .gt-lang-list {
-              background: white !important;
-              border: 1px solid #e5e7eb !important;
-              border-radius: 12px !important;
-              box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-              max-height: 400px !important;
+            /* Style the language list dropdown */
+            #gt-float-switcher .gt-lang-list,
+            body #gt-float-switcher .gt-lang-list {
+              background: #000000 !important;
+              border: 1px solid #333333 !important;
+              border-radius: 8px !important;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+              max-height: 300px !important;
               overflow-y: auto !important;
+              bottom: 100% !important;
+              left: 0 !important;
             }
             
             #gt-float-switcher .gt-lang-list a {
-              padding: 8px 12px !important;
-              transition: background-color 0.2s ease !important;
+              padding: 6px 10px !important;
+              color: #ffffff !important;
+              font-size: 11px !important;
             }
             
             #gt-float-switcher .gt-lang-list a:hover {
-              background-color: #fef3e2 !important;
+              background-color: #333333 !important;
             }
             
-            /* Flag styling */
-            #gt-float-switcher img {
-              border-radius: 4px !important;
-            }
-            
-            /* Mobile responsive */
+            /* Mobile - even smaller */
             @media (max-width: 640px) {
-              .gtranslate_wrapper {
-                bottom: 0 !important;
-                left: 0 !important;
-                right: auto !important;
+              #gt-float-switcher .gt-selected,
+              body #gt-float-switcher .gt-selected {
+                font-size: 9px !important;
+                padding: 3px 5px !important;
               }
               
-              #gt-float-switcher {
-                padding: 3px !important;
-              }
-              
-              #gt-float-switcher .gt-selected {
-                padding: 3px 6px !important;
+              #gt-float-switcher img,
+              body #gt-float-switcher img {
+                width: 12px !important;
+                height: 9px !important;
+                max-width: 12px !important;
+                max-height: 9px !important;
               }
               
               #gt-float-switcher .gt-lang-list {
@@ -230,21 +238,21 @@ export default function RootLayout({
             
             /* Scrollbar styling for language list */
             #gt-float-switcher .gt-lang-list::-webkit-scrollbar {
-              width: 6px;
+              width: 4px;
             }
             
             #gt-float-switcher .gt-lang-list::-webkit-scrollbar-track {
-              background: #f1f1f1;
+              background: #111111;
               border-radius: 10px;
             }
             
             #gt-float-switcher .gt-lang-list::-webkit-scrollbar-thumb {
-              background: #d1d5db;
+              background: #444444;
               border-radius: 10px;
             }
             
             #gt-float-switcher .gt-lang-list::-webkit-scrollbar-thumb:hover {
-              background: #9ca3af;
+              background: #666666;
             }
           `
         }} />
