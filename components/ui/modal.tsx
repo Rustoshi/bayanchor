@@ -49,7 +49,7 @@ function Modal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center overflow-y-auto py-4 sm:py-8">
+    <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center overflow-hidden">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm"
@@ -60,7 +60,7 @@ function Modal({
       {/* Modal content */}
       <div
         className={cn(
-          "relative w-full mx-4 bg-white rounded-xl shadow-xl",
+          "relative w-full mx-4 my-4 sm:my-8 bg-white rounded-xl shadow-xl",
           "animate-in fade-in-0 zoom-in-95 duration-200",
           "max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] flex flex-col",
           sizes[size]
@@ -95,7 +95,7 @@ function Modal({
         )}
 
         {/* Body - scrollable */}
-        <div className="p-4 sm:p-6 overflow-y-auto flex-1">{children}</div>
+        <div className="p-4 sm:p-6 overflow-y-auto flex-1 overscroll-contain">{children}</div>
       </div>
     </div>
   );

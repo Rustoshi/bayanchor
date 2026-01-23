@@ -14,8 +14,8 @@ const COMPANY_NAME = process.env.NEXT_PUBLIC_COMPANY_NAME || "Courier Express";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export const metadata: Metadata = {
