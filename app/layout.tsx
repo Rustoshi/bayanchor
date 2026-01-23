@@ -110,6 +110,53 @@ export default function RootLayout({
           strategy="afterInteractive"
           defer
         />
+        <Script
+          id="gtranslate-style-fix"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              function fixGTranslateStyles() {
+                var widget = document.getElementById('gt-float-switcher');
+                if (widget) {
+                  widget.style.cssText = 'position: fixed !important; bottom: 0 !important; left: 0 !important; right: auto !important; top: auto !important; margin: 0 !important; background: #000 !important; border-radius: 0 8px 0 0 !important; box-shadow: none !important; border: none !important; padding: 4px 8px !important; z-index: 9999 !important;';
+                  
+                  var selected = widget.querySelector('.gt-selected');
+                  if (selected) {
+                    selected.style.cssText = 'background: #000 !important; border: none !important; padding: 4px 6px !important; font-size: 10px !important; color: #fff !important;';
+                  }
+                  
+                  var imgs = widget.querySelectorAll('img');
+                  imgs.forEach(function(img) {
+                    img.style.cssText = 'width: 14px !important; height: 10px !important; max-width: 14px !important; max-height: 10px !important;';
+                  });
+                  
+                  var spans = widget.querySelectorAll('.gt-selected span, .gt-current-lang');
+                  spans.forEach(function(span) {
+                    span.style.cssText = 'color: #fff !important; font-size: 10px !important;';
+                  });
+                }
+              }
+              
+              // Run multiple times to catch widget after it loads
+              setTimeout(fixGTranslateStyles, 500);
+              setTimeout(fixGTranslateStyles, 1000);
+              setTimeout(fixGTranslateStyles, 2000);
+              setTimeout(fixGTranslateStyles, 3000);
+              
+              // Also observe for changes
+              var observer = new MutationObserver(function(mutations) {
+                fixGTranslateStyles();
+              });
+              
+              setTimeout(function() {
+                var widget = document.getElementById('gt-float-switcher');
+                if (widget) {
+                  observer.observe(widget, { attributes: true, childList: true, subtree: true });
+                }
+              }, 2000);
+            `,
+          }}
+        />
       </head>
       <body className={`${inter.variable} font-sans antialiased overflow-x-hidden`}>
         <Providers>{children}</Providers>
