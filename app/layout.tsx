@@ -98,7 +98,7 @@ export default function RootLayout({
                 "float_switcher_open_direction": "top",
                 "alt_flags": {"en":"usa","pt":"brazil"},
                 "flag_style": "3d",
-                "flag_size": 24,
+                "flag_size": 16,
                 "switcher_horizontal_position": "left",
                 "switcher_vertical_position": "bottom"
               };
@@ -210,20 +210,17 @@ export default function RootLayout({
             /* Mobile responsive */
             @media (max-width: 640px) {
               .gtranslate_wrapper {
-                bottom: 80px !important;
-                left: 10px !important;
+                bottom: 0 !important;
+                left: 0 !important;
                 right: auto !important;
               }
               
               #gt-float-switcher {
-                bottom: 80px !important;
-                left: 10px !important;
-                right: auto !important;
-                padding: 6px !important;
+                padding: 3px !important;
               }
               
               #gt-float-switcher .gt-selected {
-                padding: 4px 8px !important;
+                padding: 3px 6px !important;
               }
               
               #gt-float-switcher .gt-lang-list {
