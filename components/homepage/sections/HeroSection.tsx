@@ -81,7 +81,7 @@ export function HeroSection() {
             with Precision
           </motion.h1>
 
-          
+
 
           {/* Subheadline */}
           <motion.p
@@ -91,7 +91,7 @@ export function HeroSection() {
             className="text-base sm:text-lg md:text-xl text-gray-300 mb-8 sm:mb-10 max-w-2xl leading-relaxed"
           >
             From air freight to ocean cargo, we provide end-to-end logistics solutions 
-            that connect your business to 190+ countries. Fast, reliable, and always on time.
+            that connect your business to 180+ countries. Fast, reliable, and always on time.
           </motion.p>
 
           {/* Tracking Input */}
