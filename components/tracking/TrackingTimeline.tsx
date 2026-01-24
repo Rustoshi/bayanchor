@@ -41,7 +41,20 @@ export function TrackingTimeline({ events, currentStatus, estimatedDeliveryDate 
   const isDelayed = () => {
     if (!estimatedDeliveryDate) return false;
     if (currentStatus === "DELIVERED") return false;
-    return new Date(estimatedDeliveryDate) < new Date();
+
+    const [etaYear, etaMonth, etaDay] = estimatedDeliveryDate
+      .split("-")
+      .map(Number);
+    const etaUtc = Date.UTC(etaYear, etaMonth - 1, etaDay);
+
+    const now = new Date();
+    const todayUtc = Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate()
+    );
+
+    return etaUtc < todayUtc;
   };
 
   // Get last updated time

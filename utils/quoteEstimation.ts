@@ -188,10 +188,11 @@ export function getEstimatedDeliveryDays(serviceType: ServiceType): {
 
 /**
  * Calculate estimated delivery date from today.
+ * Returns a date-only string (YYYY-MM-DD) in UTC.
  */
-export function calculateEstimatedDeliveryDate(serviceType: ServiceType): Date {
+export function calculateEstimatedDeliveryDate(serviceType: ServiceType): string {
   const { max } = getEstimatedDeliveryDays(serviceType);
   const deliveryDate = new Date();
   deliveryDate.setDate(deliveryDate.getDate() + max);
-  return deliveryDate;
+  return deliveryDate.toISOString().split("T")[0];
 }

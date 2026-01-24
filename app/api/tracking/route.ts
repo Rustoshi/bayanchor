@@ -35,7 +35,7 @@ interface TrackingResponse {
   origin: string;
   destination: string;
   currentLocation?: string;
-  estimatedDeliveryDate?: Date;
+  estimatedDeliveryDate?: string;
   sender: {
     name: string;
     address: string;
@@ -143,7 +143,9 @@ async function handleGet(request: NextRequest): Promise<NextResponse> {
       origin: shipment.origin,
       destination: shipment.destination,
       currentLocation: shipment.currentLocation,
-      estimatedDeliveryDate: shipment.estimatedDeliveryDate,
+      estimatedDeliveryDate: shipment.estimatedDeliveryDate
+        ? shipment.estimatedDeliveryDate.toISOString().split("T")[0]
+        : undefined,
       sender: {
         name: shipment.sender.name,
         address: shipment.sender.address,

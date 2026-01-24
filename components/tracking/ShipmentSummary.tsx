@@ -87,11 +87,14 @@ export function ShipmentSummary({ data }: ShipmentSummaryProps) {
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return "Pending";
-    return new Date(dateString).toLocaleDateString("en-US", {
+    const [year, month, day] = dateString.split("-").map(Number);
+    const date = new Date(Date.UTC(year, month - 1, day));
+    return date.toLocaleDateString("en-US", {
       weekday: "short",
       month: "short",
       day: "numeric",
       year: "numeric",
+      timeZone: "UTC",
     });
   };
 
@@ -99,7 +102,20 @@ export function ShipmentSummary({ data }: ShipmentSummaryProps) {
   const isOverdue = () => {
     if (!data.estimatedDeliveryDate) return false;
     if (data.status === "DELIVERED") return false;
-    return new Date(data.estimatedDeliveryDate) < new Date();
+
+    const [etaYear, etaMonth, etaDay] = data.estimatedDeliveryDate
+      .split("-")
+      .map(Number);
+    const etaUtc = Date.UTC(etaYear, etaMonth - 1, etaDay);
+
+    const now = new Date();
+    const todayUtc = Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate()
+    );
+
+    return etaUtc < todayUtc;
   };
 
   return (

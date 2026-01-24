@@ -785,7 +785,7 @@ export default function ShipmentDetailPage() {
                 <div>
                   <p className="text-sm font-medium text-gray-600">Estimated Delivery</p>
                   <p className="text-gray-900">
-                    {formatDate(shipment.estimatedDeliveryDate)}
+                    {formatDate(shipment.estimatedDeliveryDate, { timeZone: "UTC" })}
                   </p>
                 </div>
               )}

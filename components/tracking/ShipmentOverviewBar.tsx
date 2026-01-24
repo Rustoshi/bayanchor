@@ -60,15 +60,27 @@ export function ShipmentOverviewBar({ data, isVisible }: ShipmentOverviewBarProp
 
   const formatETA = (dateString?: string) => {
     if (!dateString) return "Pending";
-    const date = new Date(dateString);
+    const [year, month, day] = dateString.split("-").map(Number);
+    const etaUtc = Date.UTC(year, month - 1, day);
+
     const now = new Date();
-    const diffDays = Math.ceil((date.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-    
+    const todayUtc = Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate()
+    );
+
+    const diffDays = Math.round((etaUtc - todayUtc) / (1000 * 60 * 60 * 24));
+
     if (diffDays < 0) return "Overdue";
     if (diffDays === 0) return "Today";
     if (diffDays === 1) return "Tomorrow";
-    
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+    return new Date(etaUtc).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      timeZone: "UTC",
+    });
   };
 
   return (

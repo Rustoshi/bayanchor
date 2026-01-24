@@ -125,7 +125,9 @@ const handlePut: AuthenticatedHandler = async (request, context) => {
     if (updateData.destination) shipment.destination = updateData.destination;
     if (updateData.currentLocation) shipment.currentLocation = updateData.currentLocation;
     if (updateData.estimatedDeliveryDate) {
-      shipment.estimatedDeliveryDate = new Date(updateData.estimatedDeliveryDate);
+      shipment.estimatedDeliveryDate = new Date(
+        `${updateData.estimatedDeliveryDate}T00:00:00.000Z`
+      );
     }
     
     // Handle package images update

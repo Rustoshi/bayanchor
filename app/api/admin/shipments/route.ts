@@ -54,11 +54,12 @@ const handlePost: AuthenticatedHandler = async (request, context) => {
       return NextResponse.json(response, { status: 500 });
     }
 
-    // Calculate estimated delivery date if not provided
+    // Calculate estimated delivery date if not provided.
+    // Work with a date-only string (YYYY-MM-DD) and convert to a UTC Date only when persisting.
     const serviceType = shipmentData.serviceType || ServiceType.STANDARD;
-    const estimatedDeliveryDate = shipmentData.estimatedDeliveryDate
-      ? new Date(shipmentData.estimatedDeliveryDate)
-      : calculateEstimatedDeliveryDate(serviceType);
+    const estimatedDeliveryDateString =
+      shipmentData.estimatedDeliveryDate || calculateEstimatedDeliveryDate(serviceType);
+    const estimatedDeliveryDate = new Date(`${estimatedDeliveryDateString}T00:00:00.000Z`);
 
     // Process package images if provided
     const packageImages = (shipmentData.packageImages || []).slice(0, 5).map(

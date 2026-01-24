@@ -261,7 +261,7 @@ function ShipmentsContent() {
                   </TableCell>
                   <TableCell className="text-gray-700">
                     {shipment.estimatedDeliveryDate
-                      ? formatDate(shipment.estimatedDeliveryDate)
+                      ? formatDate(shipment.estimatedDeliveryDate, { timeZone: "UTC" })
                       : "-"}
                   </TableCell>
                   <TableCell className="text-gray-700">
