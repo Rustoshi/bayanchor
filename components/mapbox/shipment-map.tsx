@@ -131,8 +131,15 @@ export function ShipmentMap({ shipment, className }: ShipmentMapProps) {
       setMapError(null);
       
       // Use existing coordinates or geocode from address
-      let origin: Coordinates | null = shipment.sender.coordinates || null;
-      let dest: Coordinates | null = shipment.receiver.coordinates || null;
+      // Priority: originLocation/destinationLocation > sender/receiver coordinates
+      let origin: Coordinates | null = 
+        shipment.originLocation?.coordinates || 
+        shipment.sender.coordinates || 
+        null;
+      let dest: Coordinates | null = 
+        shipment.destinationLocation?.coordinates || 
+        shipment.receiver.coordinates || 
+        null;
 
       // Geocode origin if missing
       if (!origin && shipment.origin) {
@@ -166,7 +173,7 @@ export function ShipmentMap({ shipment, className }: ShipmentMapProps) {
     return () => {
       isMounted = false;
     };
-  }, [shipment.sender.coordinates, shipment.receiver.coordinates, shipment.origin, shipment.destination]);
+  }, [shipment.originLocation?.coordinates, shipment.destinationLocation?.coordinates, shipment.sender.coordinates, shipment.receiver.coordinates, shipment.origin, shipment.destination]);
 
   // Get the latest tracking event coordinates for current package location
   const [currentCoords, setCurrentCoords] = React.useState<Coordinates | null>(null);

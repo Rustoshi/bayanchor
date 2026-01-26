@@ -3,7 +3,7 @@ import { connectDB } from "@/lib/db";
 import Shipment from "@/models/Shipment";
 import TrackingEvent from "@/models/TrackingEvent";
 import { withAuth, AuthenticatedHandler } from "@/middleware/withAuth";
-import { validateData, createShipmentSchema, paginationSchema } from "@/utils/validation";
+import { validateData, createShipmentSchema, paginationSchema, normalizeLocationInfo, normalizeContactInfo } from "@/utils/validation";
 import { generateTrackingCode } from "@/utils/trackingCode";
 import { calculateEstimatedDeliveryDate } from "@/utils/quoteEstimation";
 import { sendShipmentCreatedEmail } from "@/lib/resend";
@@ -85,15 +85,16 @@ const handlePost: AuthenticatedHandler = async (request, context) => {
         shipmentType: shipmentData.shipmentType,
         shipmentMode: shipmentData.shipmentMode,
         serviceType: shipmentData.serviceType,
-        // Parties
-        sender: shipmentData.sender,
-        receiver: shipmentData.receiver,
+        // Parties - normalize coordinates to lat/lng format
+        sender: normalizeContactInfo(shipmentData.sender),
+        receiver: normalizeContactInfo(shipmentData.receiver),
         package: shipmentData.package,
         // Route
         origin: shipmentData.origin,
         destination: shipmentData.destination,
-        originLocation: shipmentData.originLocation,
-        destinationLocation: shipmentData.destinationLocation,
+        // Normalize location coordinates to lat/lng format
+        originLocation: normalizeLocationInfo(shipmentData.originLocation),
+        destinationLocation: normalizeLocationInfo(shipmentData.destinationLocation),
         // Status
         status: ShipmentStatus.CREATED,
         currentLocation: shipmentData.origin,

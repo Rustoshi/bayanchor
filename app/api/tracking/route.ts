@@ -3,7 +3,7 @@ import { connectDB } from "@/lib/db";
 import Shipment from "@/models/Shipment";
 import TrackingEvent from "@/models/TrackingEvent";
 import { withRateLimit, checkRateLimit } from "@/middleware/rateLimit";
-import { validateData, trackingQuerySchema } from "@/utils/validation";
+import { validateData, trackingQuerySchema, normalizeCoordinates } from "@/utils/validation";
 import { ApiResponse, IShipment, ITrackingEvent } from "@/types";
 
 /**
@@ -197,19 +197,13 @@ async function handleGet(request: NextRequest): Promise<NextResponse> {
         city: shipment.originLocation.city,
         state: shipment.originLocation.state,
         country: shipment.originLocation.country,
-        coordinates: (shipment.originLocation.coordinates?.lat !== undefined && shipment.originLocation.coordinates?.lng !== undefined) ? {
-          lat: shipment.originLocation.coordinates.lat,
-          lng: shipment.originLocation.coordinates.lng,
-        } : undefined,
+        coordinates: normalizeCoordinates(shipment.originLocation.coordinates),
       } : undefined,
       destinationLocation: shipment.destinationLocation ? {
         city: shipment.destinationLocation.city,
         state: shipment.destinationLocation.state,
         country: shipment.destinationLocation.country,
-        coordinates: (shipment.destinationLocation.coordinates?.lat !== undefined && shipment.destinationLocation.coordinates?.lng !== undefined) ? {
-          lat: shipment.destinationLocation.coordinates.lat,
-          lng: shipment.destinationLocation.coordinates.lng,
-        } : undefined,
+        coordinates: normalizeCoordinates(shipment.destinationLocation.coordinates),
       } : undefined,
       events: events.map((event) => ({
         status: event.status,

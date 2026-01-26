@@ -211,6 +211,96 @@ export interface ValidationResult<T> {
   error?: string;
 }
 
+// ============================================================================
+// Coordinate Normalization Helper
+// ============================================================================
+
+interface RawCoordinates {
+  lat?: number;
+  lng?: number;
+  latitude?: number;
+  longitude?: number;
+}
+
+interface NormalizedCoordinates {
+  lat: number;
+  lng: number;
+}
+
+/**
+ * Normalize coordinates to always use lat/lng format.
+ * Handles both lat/lng and latitude/longitude input formats.
+ */
+export function normalizeCoordinates(coords: RawCoordinates | undefined | null): NormalizedCoordinates | undefined {
+  if (!coords) return undefined;
+  
+  const lat = coords.lat ?? coords.latitude;
+  const lng = coords.lng ?? coords.longitude;
+  
+  if (lat === undefined || lng === undefined) return undefined;
+  
+  return { lat, lng };
+}
+
+interface RawLocationInfo {
+  city: string;
+  state: string;
+  country: string;
+  coordinates?: RawCoordinates;
+}
+
+interface NormalizedLocationInfo {
+  city: string;
+  state: string;
+  country: string;
+  coordinates?: NormalizedCoordinates;
+}
+
+/**
+ * Normalize location info, ensuring coordinates use lat/lng format.
+ */
+export function normalizeLocationInfo(location: RawLocationInfo | undefined | null): NormalizedLocationInfo | undefined {
+  if (!location) return undefined;
+  
+  return {
+    city: location.city,
+    state: location.state,
+    country: location.country,
+    coordinates: normalizeCoordinates(location.coordinates),
+  };
+}
+
+interface RawContactInfo {
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  coordinates?: RawCoordinates;
+}
+
+interface NormalizedContactInfo {
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  coordinates?: NormalizedCoordinates;
+}
+
+/**
+ * Normalize contact info, ensuring coordinates use lat/lng format.
+ */
+export function normalizeContactInfo(contact: RawContactInfo | undefined | null): NormalizedContactInfo | undefined {
+  if (!contact) return undefined;
+  
+  return {
+    name: contact.name,
+    phone: contact.phone,
+    email: contact.email,
+    address: contact.address,
+    coordinates: normalizeCoordinates(contact.coordinates),
+  };
+}
+
 /**
  * Validate data against a Zod schema with error formatting.
  */

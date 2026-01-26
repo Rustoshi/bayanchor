@@ -4,7 +4,7 @@ import Shipment from "@/models/Shipment";
 import TrackingEvent from "@/models/TrackingEvent";
 import Carrier from "@/models/Carrier"; // Required for populate
 import { withAuth, AuthenticatedHandler } from "@/middleware/withAuth";
-import { validateData, updateShipmentSchema } from "@/utils/validation";
+import { validateData, updateShipmentSchema, normalizeLocationInfo, normalizeContactInfo } from "@/utils/validation";
 import { deleteFile } from "@/lib/cloudinary";
 import { ApiResponse, IShipment } from "@/types";
 import { Types } from "mongoose";
@@ -115,15 +115,18 @@ const handlePut: AuthenticatedHandler = async (request, context) => {
     if (updateData.shipmentMode) shipment.shipmentMode = updateData.shipmentMode;
     if (updateData.serviceType) shipment.serviceType = updateData.serviceType;
     
-    // Contact info
-    if (updateData.sender) shipment.sender = updateData.sender;
-    if (updateData.receiver) shipment.receiver = updateData.receiver;
+    // Contact info - normalize coordinates to lat/lng format
+    if (updateData.sender) shipment.sender = normalizeContactInfo(updateData.sender)!;
+    if (updateData.receiver) shipment.receiver = normalizeContactInfo(updateData.receiver)!;
     if (updateData.package) shipment.package = updateData.package;
     
     // Route info
     if (updateData.origin) shipment.origin = updateData.origin;
     if (updateData.destination) shipment.destination = updateData.destination;
     if (updateData.currentLocation) shipment.currentLocation = updateData.currentLocation;
+    // Normalize location coordinates to lat/lng format
+    if (updateData.originLocation) shipment.originLocation = normalizeLocationInfo(updateData.originLocation);
+    if (updateData.destinationLocation) shipment.destinationLocation = normalizeLocationInfo(updateData.destinationLocation);
     if (updateData.estimatedDeliveryDate) {
       shipment.estimatedDeliveryDate = new Date(
         `${updateData.estimatedDeliveryDate}T00:00:00.000Z`
